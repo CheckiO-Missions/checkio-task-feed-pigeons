@@ -1,0 +1,190 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        <i>I have no idea how to start solving this mission.</i>
+    </div>
+    <div class="answer">
+        <p>
+            The general idea is the following. Until you have enough food to feed next number of pigeons, you just feed them, increase number of pigeons to come and decrease food. If not, return the number of pigeons already fed or may be feed.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <i>Ok, what should I start from?</i>
+    </div>
+    <div class="answer">
+        <p>
+            This mission is solving easier if you imagine the situation described and each step. What you need first are two variables: <b class="code">fed</b> - for number of pigeons you already feed at least once and going to feed each minute if food is enough, <b class="code">new</b> - for number of pigeons, which come to you next minute.
+        </p>
+        <p>
+            What should be the initial values for these variables? When you start this activity, you have <b class="code">0</b> pigeons fed and <b class="code">1</b> pigeon you are going to feed next minute.
+        </p>
+        <pre class="brush: python">
+fed = 0
+new = 1
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <i>
+            Ok, what to do next?
+        </i>
+    </div>
+    <div class="answer">
+        <p>
+            What you are going to do next is to repeat some operations, until you have enough <b class="code">food</b> for the current number of pigeons near you <b class="code">fed</b> and next number of pigeons to come <b class="code">new</b>. The <a target="_blank" href="https://www.w3schools.com/python/python_while_loops.asp">while loop</a> allows do describe such situations the best.
+        </p>
+        <pre class="brush: python">
+fed = 0
+new = 1
+while food >= fed + new:
+    ...
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <i>
+            I don't understand, how exactly to operate with variables inside loop.
+        </i>
+    </div>
+    <div class="answer">
+        <p>
+            Let's keep imagine the situation. The first you do - you feed pigeons you already have near you (pigeons eat and eat every minute without stop) and those which have come this minute. So, the number of <b class="code">fed</b> pigeons increases by <b class="code">new</b> pigeons and ...
+        </p>
+        <pre class="brush: python">
+fed += new
+        </pre>
+        <p>
+            ... the <b class="code">food</b> you have decreases by number of all pigeons your <b class="code">fed</b> this minute.
+        </p>
+        <pre class="brush: python">
+food -= fed
+        </pre>
+        <p>
+            Since you know, that next minute even more pigeons will come, you should also increase this number of <b class="code">new</b> pigeons inside loop.
+        </p>
+        <pre class="brush: python">
+new += 1
+        </pre>
+        <p>
+            As I previously said, you do these operations again and again (inside loop) until you have enough food for the present and next number of pigeons.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <i>
+            So how my solution should look so far?
+        </i>
+    </div>
+    <div class="answer">
+        <p>
+            Just join all previous hints together.
+        </p>
+        <pre class="brush: python">
+fed = 0
+new = 1
+while food >= fed + new:
+    fed += new
+    food -= fed
+    new += 1
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <i>
+            Help me to finish the logic. What to do when there is not enough food to feed all pigeons next minute?
+        </i>
+    </div>
+    <div class="answer">
+        <p>
+            The <b class="code">food</b> may not be enough to feed <b class="code">fed + new</b>, but there two case possible here. The <b class="code">food</b> remains may be bigger than presented pigeons and enough to feed some part of <b class="code">new</b> pigeons for the first time, so the total number of fed pigeons will increase and the general number of pigeons you <b class="code">fed</b> this minute (and the result of function) will be equal <b class="code">food</b>. 
+        </p>
+        <p>
+            The second possible variant is when <b class="code">food</b> remains is smaller then <b class="code">fed</b> - not even enough to feed already presented pigeons, but the whole number of <b class="code">fed</b> pigeons are already fed at least once, so the result of function in this case is <b class="code">fed</b>.
+        </p>
+        <p>
+            In short, you are seeking the maximum between two values - pigeons you may feed this minute(<b class="code">food</b> remains) and which are already <b class="code">fed</b>. 
+        </p>
+        <pre class="brush: python">
+result = max(food, fed)
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <i>So, how my final solution should look like?</i>
+    </div>
+    <div class="answer">
+        <p>
+            You just need to wrap your code into function expression and return <b class="code">result</b> expression.
+        </p>
+        <p>Here is the whole solution:</p>
+        <pre class="brush: python">
+def checkio(food: int) -> int:
+
+    fed = 0
+    new = 1
+    while food >= fed + new:
+        fed += new
+        food -= fed
+        new += 1
+    
+    return max(food, fed)
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <i>Show me more solutions!<br />
+        'Cause I wanna be a real Python Ninnjaa!</i>
+    </div>
+    <div class="answer">
+        <p>Sure, grab it!</p>
+        <p>
+            In this solution the recursion is used. If not enough food, you return values in the same cases as in solution from hints. If there is enough food, you call function again with updated values. 
+        </p>
+        <pre class="brush: python">
+def checkio(food: int, all_pig: int = 1, fed: int = 0) -> int:
+
+    if food <= fed:
+        return fed
+    if food <= all_pig:
+        return food
+        
+    return checkio(food - all_pig, 2 * all_pig - fed + 1, all_pig)
+        </pre>
+        <p>
+            Sequence of the pigeons presented for the every minute is 1, 3, 6, 10, 15 ... Sequence of the fed pigeons for the every minute is 1, 4, 10, 20, 35 ... It's the a(i) = i*(i+1)*(i+2)/6 sequence. Put a(i) = food and get the cubic equation: i*(i+1)*(i+2) - 6*n = 0 which is possible to solve with Cardano's method.
+        </p>
+        <pre class="brush: python">
+from math import sqrt
+
+
+def checkio(food: int) -> int:
+
+    alpha = (3*food - sqrt(9*(food**2)-1/27)) ** (1/3)
+    beta = (3*food + sqrt(9*(food**2)-1/27)) ** (1/3)
+    minute = (alpha + beta - 1) // 1 + 1
+    
+    fed = (minute-1)*minute/2
+    last_feed = (minute**2 - 1)*minute / 6
+        
+    return max(food - last_feed, fed)
+        </pre>
+        <p><b>Click "Best solutions" at mission menu and see a lot of other interesting solutions!</b></p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <i>Thanks! I know and understand more now! Everything works fine!</i>
+    </div>
+    <div class="answer">
+        Glad to hear it!
+    </div>
+</div>
+</body>
