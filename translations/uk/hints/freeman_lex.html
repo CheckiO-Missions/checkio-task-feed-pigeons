@@ -1,0 +1,190 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        <i>Я уявлення не маю, як почати розв'язок цієї місії.</i>
+    </div>
+    <div class="answer">
+        <p>
+            Загалом, ідея полягає у наступному. Поки ти маєш достатньо корму, щоб нагодувати наступну кількість голубів, ти просто їх годуєш, збільшуєш кількість голубів, які прилетять наступними і зменшуєш кількість їжі. Якщо ж маєш вже недостатньо - повертаєш кількість голубів, яких вже нагодував, або можеш нагодувати.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <i>Добре, то з чого мені почати?</i>
+    </div>
+    <div class="answer">
+        <p>
+            Ця місія розв'язується легше, якщо уявити цю ситуацію і кожен крок. Те що тобі потрібно спочатку, це дві змінні: <b class="code">fed</b> - для кількості голубів, яких ти вже погодував принаймі раз і будеш годувати щохвилини, якщо їжі вистачить; <b class="code">new</b> - для кількості голубів, що прилетять наступної хвилини.
+        </p>
+        <p>
+            Якими ж повинні бути початкові значення цих змінних? Коли ти розпочинаєш годування, то маєш <b class="code">0</b> нагодованих голубів і <b class="code">1</b> голуб, якого ти маєш нагодувати наступної хвилини.
+        </p>
+        <pre class="brush: python">
+fed = 0
+new = 1
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <i>
+            Це ясно, що робити далі?
+        </i>
+    </div>
+    <div class="answer">
+        <p>
+            Далі ти маєш повторювати певні операції, поки є достатньо <b class="code">food</b> для поточної кількості голубів біля себе <b class="code">fed</b> і тих, що прилетять <b class="code">new</b>. Цикл <a target="_blank" href="https://www.w3schools.com/python/python_while_loops.asp">while </a> дозволяє описати цю ситуацію найкраще.
+        </p>
+        <pre class="brush: python">
+fed = 0
+new = 1
+while food >= fed + new:
+    ...
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <i>
+            Я не розумію, як саме оперувати зі змінними всередині циклу.
+        </i>
+    </div>
+    <div class="answer">
+        <p>
+            Продовжуймо уявляти ситуацію. Найперше, що ти зробиш - погодуєш голубів, які вже були біля тебе (голуби їдять і їдять кожну хвилину без зупинки), і тих, що прилетіли цієї хвилини. Отже, кількість погодованих голубів <b class="code">fed</b> зросте на кількість <b class="code">new</b> і ...
+        </p>
+        <pre class="brush: python">
+fed += new
+        </pre>
+        <p>
+            ...їжа <b class="code">food</b>, що ти маєш, зменшиться на всю кількість голубів <b class="code">fed</b>, яких ти погодував цієї хвилини.
+        </p>
+        <pre class="brush: python">
+food -= fed
+        </pre>
+        <p>
+            Оскільки ти знаєш, що наступної хвилини прилетить ще більше голубів, то ти також маєш збільшити кількість нових голубів <b class="code">new</b> всередині циклу.
+        </p>
+        <pre class="brush: python">
+new += 1
+        </pre>
+        <p>
+            Як я сказав вище, ти здійснюєш ці операції знову і знову (всередині циклу), поки маєш достатньо корму для присутньої і прийдешньої кількості голубів.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <i>
+            То як має виглядати моє рішення на цьому етапі?
+        </i>
+    </div>
+    <div class="answer">
+        <p>
+            Просто об'єднай всі попередні підказки разом.
+        </p>
+        <pre class="brush: python">
+fed = 0
+new = 1
+while food >= fed + new:
+    fed += new
+    food -= fed
+    new += 1
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <i>
+            Допоможи мені завершити логіку. Що робити, коли корму вже не вистачає, щоб нагодувати всіх голубів наступної хвилини?
+        </i>
+    </div>
+    <div class="answer">
+        <p>
+            Їжі <b class="code">food</b> може бути недостатньо, щоб нагодувати всіх <b class="code">fed + new</b> голубів, але тут можливі далі два варіанти. Їжі <b class="code">food</b>, що лишилася, може бути більше ніж наявна кількість голубів і достатньо, щоб нагодувати частину <b class="code">new</b> голубів уперше, тож загальна кількість нагодованих голубів <b class="code">fed</b> зросте і буде рівною <b class="code">food</b> (результат функції). 
+        </p>
+        <p>
+            Другий можливий варіант, це коли залишків їжі <b class="code">food</b> менше ніж <b class="code">fed</b> - навіть недостатньо, щоб нагодувати наявну кількість голубів, але ж вся кількість голубів <b class="code">fed</b> вже нагодовані хоча б раз раніше, тож результат функції у цьому випадку дорівнює <b class="code">fed</b>.
+        </p>
+        <p>
+            Якщо коротко, ти шукаєш максимум із двох значень - кількості голубів, що ти можеш нагодувати цієї хвилини (залишок їжі <b class="code">food</b>) і тих, що вже нагодовані - <b class="code">fed</b>. 
+        </p>
+        <pre class="brush: python">
+result = max(food, fed)
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <i>Як має виглядати моє остаточне рішення?</i>
+    </div>
+    <div class="answer">
+        <p>
+            Тобі лише потрібно обгорнути свій код у вираз функції і повернути вираз <b class="code">result</b>.
+        </p>
+        <p>Ось повний розв'язок:</p>
+        <pre class="brush: python">
+def checkio(food: int) -> int:
+
+    fed = 0
+    new = 1
+    while food >= fed + new:
+        fed += new
+        food -= fed
+        new += 1
+    
+    return max(food, fed)
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <i>Покажи мені більше розв'язків!<br />
+        Адже я хочу стати справжнім Python Ніндзею!</i>
+    </div>
+    <div class="answer">
+        <p>Звісно, тримай!</p>
+        <p>
+            У цьому розв'язку використовується рекурсія. Якщо їжі недостатньо, ти повертаєш значення у тих самим випадках, що і у розв'язку з підказок. Якщо ж їжі вдосталь, ти викликаєш цю ж функцію з оновленими значеннями.
+        </p>
+        <pre class="brush: python">
+def checkio(food: int, all_pig: int = 1, fed: int = 0) -> int:
+
+    if food <= fed:
+        return fed
+    if food <= all_pig:
+        return food
+        
+    return checkio(food - all_pig, 2 * all_pig - fed + 1, all_pig)
+        </pre>
+        <p>
+            Сукупність голубів, що присутні кожної хвилини, наступна 1, 3, 6, 10, 15 ... Сукупність погодованих голубів після певної кількості хвилини така 1, 4, 10, 20, 35 ... Ця сукупність виражається формулою a(i) = i*(i+1)*(i+2)/6. Якщо замінити a(i) на <b class="code">food</b>, то отримаєш кубічне рівняння: i*(i+1)*(i+2) - 6*n = 0, що має розв'язок за методом Кардано.
+        </p>
+        <pre class="brush: python">
+from math import sqrt
+
+
+def checkio(food: int) -> int:
+
+    alpha = (3*food - sqrt(9*(food**2)-1/27)) ** (1/3)
+    beta = (3*food + sqrt(9*(food**2)-1/27)) ** (1/3)
+    minute = (alpha + beta - 1) // 1 + 1
+    
+    fed = (minute-1)*minute/2
+    last_feed = (minute**2 - 1)*minute / 6
+        
+    return max(food - last_feed, fed)
+        </pre>
+        <p><b>Тисни "Best solutions" в меню місії і побачиш багато інших цікавих розв'язків!</b></p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <i>Дякую! Тепер я знаю і розумію більше! Все працює як слід!</i>
+    </div>
+    <div class="answer">
+        Приємно це чути!
+    </div>
+</div>
+</body>
