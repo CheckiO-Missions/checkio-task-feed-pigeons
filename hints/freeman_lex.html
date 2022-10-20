@@ -34,7 +34,7 @@ new = 1
     </div>
     <div class="answer">
         <p>
-            What you are going to do next is to repeat some operations, until you have enough <b class="code">food</b> for the current number of pigeons near you <b class="code">fed</b> and next number of pigeons to come <b class="code">new</b>. The <a target="_blank" href="https://www.w3schools.com/python/python_while_loops.asp">while loop</a> allows do describe such situations the best.
+            What you are going to do next is to repeat some operations, until you have enough <b class="code">food</b> for the current number of pigeons near you <b class="code">fed</b> and next number of pigeons to come <b class="code">new</b>. The <a target="_blank" href="https://www.w3schools.com/python/python_while_loops.asp">while loop</a> allows to describe such situations the best.
         </p>
         <pre class="brush: python">
 fed = 0
@@ -102,10 +102,10 @@ while food >= fed + new:
     </div>
     <div class="answer">
         <p>
-            The <b class="code">food</b> may not be enough to feed <b class="code">fed + new</b>, but there two case possible here. The <b class="code">food</b> remains may be bigger than presented pigeons and enough to feed some part of <b class="code">new</b> pigeons for the first time, so the total number of fed pigeons will increase and the general number of pigeons you <b class="code">fed</b> this minute (and the result of function) will be equal <b class="code">food</b>. 
+            The <b class="code">food</b> may not be enough to feed <b class="code">fed + new</b>, but there are two case possible here. The <b class="code">food</b> remains may be bigger than presented pigeons and enough to feed some part of <b class="code">new</b> pigeons for the first time, so the total number of fed pigeons will increase and the general number of pigeons you <b class="code">fed</b> this minute (and the result of function) will be equal <b class="code">food</b>. 
         </p>
         <p>
-            The second possible variant is when <b class="code">food</b> remains is smaller then <b class="code">fed</b> - not even enough to feed already presented pigeons, but the whole number of <b class="code">fed</b> pigeons are already fed at least once, so the result of function in this case is <b class="code">fed</b>.
+            The second possible variant is when <b class="code">food</b> remains is smaller than <b class="code">fed</b> - not even enough to feed already presented pigeons, but the whole number of <b class="code">fed</b> pigeons are already fed at least once, so the result of function in this case is <b class="code">fed</b>.
         </p>
         <p>
             In short, you are seeking the maximum between two values - pigeons you may feed this minute(<b class="code">food</b> remains) and which are already <b class="code">fed</b>. 
@@ -121,7 +121,7 @@ result = max(food, fed)
     </div>
     <div class="answer">
         <p>
-            You just need to wrap your code into function expression and return <b class="code">result</b> expression.
+            You just need to wrap your code into a function expression and return <b class="code">result</b> expression.
         </p>
         <p>Here is the whole solution:</p>
         <pre class="brush: python">
@@ -146,7 +146,7 @@ def checkio(food: int) -> int:
     <div class="answer">
         <p>Sure, grab it!</p>
         <p>
-            In this solution the recursion is used. If not enough food, you return values in the same cases as in solution from hints. If there is enough food, you call function again with updated values. 
+            In this solution the recursion is used. If not enough food, you return values in the same cases as in solution from hints. If there is enough food, you call the function again with updated values. 
         </p>
         <pre class="brush: python">
 def checkio(food: int, all_pig: int = 1, fed: int = 0) -> int:
