@@ -124,6 +124,7 @@ result = max(food, fed)
             Тобі лише потрібно обгорнути свій код у вираз функції і повернути вираз <b class="code">result</b>.
         </p>
         <p>Ось повний розв'язок:</p>
+        <div class="spoiler">
         <pre class="brush: python">
 def checkio(food: int) -> int:
 
@@ -136,6 +137,7 @@ def checkio(food: int) -> int:
     
     return max(food, fed)
         </pre>
+        </div>
     </div>
 </div>
 <div class="question-answer">
@@ -148,6 +150,7 @@ def checkio(food: int) -> int:
         <p>
             У цьому розв'язку використовується рекурсія. Якщо їжі недостатньо, ти повертаєш значення у тих самим випадках, що і у розв'язку з підказок. Якщо ж їжі вдосталь, ти викликаєш цю ж функцію з оновленими значеннями.
         </p>
+        <div class="spoiler">
         <pre class="brush: python">
 def checkio(food: int, all_pig: int = 1, fed: int = 0) -> int:
 
@@ -158,9 +161,11 @@ def checkio(food: int, all_pig: int = 1, fed: int = 0) -> int:
         
     return checkio(food - all_pig, 2 * all_pig - fed + 1, all_pig)
         </pre>
+        </div>
         <p>
             Сукупність голубів, що присутні кожної хвилини, наступна 1, 3, 6, 10, 15 ... Сукупність погодованих голубів після певної кількості хвилини така 1, 4, 10, 20, 35 ... Ця сукупність виражається формулою a(i) = i*(i+1)*(i+2)/6. Якщо замінити a(i) на <b class="code">food</b>, то отримаєш кубічне рівняння: i*(i+1)*(i+2) - 6*n = 0, що має розв'язок за методом Кардано.
         </p>
+        <div class="spoiler">
         <pre class="brush: python">
 from math import sqrt
 
@@ -176,6 +181,7 @@ def checkio(food: int) -> int:
         
     return max(food - last_feed, fed)
         </pre>
+        </div>
         <p><b>Тисни "Best solutions" в меню місії і побачиш багато інших цікавих розв'язків!</b></p>
     </div>
 </div>
