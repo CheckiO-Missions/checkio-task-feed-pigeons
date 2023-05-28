@@ -1,10 +1,10 @@
 <p>
-    J'ai commencé à nourrir 1 pigeon. Une minute plus tard, 2 pigeons supplémentaires sont arrivés, 
-    et 2 minutes plus tard, voilà encore 3 pigeons de plus. Puis 4, et ainsi de suite (ex : 1 + 2 + 3 + 4 + ...). 
-    Une portion de nourriture nourrit 1 pigeon pendant 1 minute. Mais au cas où il n'y a pas assez de nourriture pour 
-    tous les pigeons, les pigeons arrivés les premiers sont nourris les premiers. Les pigeons sont affamés et se nourrissent 
-    sans jamais s'arrêter.
-    Si j'ai  <strong>N</strong> portions de nourriture, combien de pigeons seront nourris avec au moins une portion de nourriture ?
+    Je commence à nourrir l'un des pigeons.
+    Une minute plus tard, deux autres pigeons passent et une minute plus tard, trois autres.
+    Puis 4, et ainsi de suite (Ex: 1+2+3+4+...). Une portion de nourriture permet à un pigeon de survivre pendant une minute,
+    mais au cas où il n'y aurait pas assez de nourriture pour tous les oiseaux, les pigeons qui sont arrivés en premier ont mangé en premier.
+    Les pigeons sont des animaux affamés qui mangent sans savoir quand s'arrêter.
+    Si j'ai <b class="code">N</b> portions de nourriture pour oiseaux, combien de pigeons seront nourris avec au moins une portion de blé?
 </p>
 
 <p style="text-align: center;">
@@ -16,28 +16,28 @@
 
 
 <p>
-<strong>Entrée:</strong> une quantité de portions de nourriture (nombre entier naturel)
+   <strong>Entrée:</strong> Une quantité de portions de blé sous la forme d'un<span>nombre</span> positif {% if is_js %} <span>(number)</span><span> </span>{% else %} <span>integer</span>{% endif %}.
 </p>
 
 <p>
-<strong>Sortie: </strong> le nombre de pigeons nourris (nombre entier naturel)
+   <strong>Sortie:</strong> Le nombre de pigeons nourris sous la forme {% if is_js %}d'un <span>nombre</span> <span>(number)</span>{% else %} d'un <span>entier</span> <span>(integer)</span>{% endif %}.
 </p>
 
 
 <div class="for_info_only">
     <p>
-        <strong>Examples:</strong>
+        <strong>Exemples:</strong>
     </p>
     <pre class="brush: {% if is_js %}javascript{% else %}python{% endif %}">{{init_code_tmpl}}</pre>
 </div>
 
 <p class="for_info_only">
-    <strong>Comment est-ce utilisé: </strong>
-    Cette mission illustre comment modéliser des situations diverses. 
-    Bien sûr, le modèle utilise des approximations. Mais bien souvent, nous n'avons pas besoin de modèle parfait.
-
+    <strong>Comment l'utiliser:</strong>
+    <i>cette tâche illustre la façon dont nous pouvons modéliser diverses situations.
+    Bien sûr, le modèle a une approximation limitée, mais souvent nous n'avons pas besoin d'un modèle parfait.</i>
 
 </p>
 <p>
-    <strong>Préconditon: </strong> 0 &lt; N &lt; 10<sup>5</sup>.
+    <strong>Condition préalable:</strong>
+    <i>0 &lt; N &lt;<sup>105</sup>.</i>
 </p>
