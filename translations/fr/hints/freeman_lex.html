@@ -1,0 +1,196 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        <p>Je n'ai aucune idée de la manière de commencer à résoudre cette mission.</p>
+    </div>
+    <div class="answer">
+        <p>
+            💡 L'idée générale est la suivante. Jusqu'à ce que vous avez assez de nourriture pour nourrir le prochain nombre de pigeons, vous avez juste les nourrir, augmenter le nombre de pigeons à venir et diminuer la nourriture. Si ce n'est pas le cas, retournez le nombre de pigeons déjà nourris ou peut être nourris.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>Ok, de quoi dois-je partir?</p>
+    </div>
+    <div class="answer">
+        <p>
+            Cette mission est plus facile à résoudre si vous imaginez la situation décrite et chaque étape. Vous avez d'abord besoin de deux variables: <b class="code">fed</b> - pour le nombre de pigeons que vous avez déjà nourris au moins une fois et que vous allez nourrir à chaque minute si la nourriture est suffisante, <b class="code">new</b> - pour le nombre de pigeons qui viennent à vous à la minute suivante.
+        </p>
+        <p>
+            Quelles devraient être les valeurs initiales de ces variables? Lorsque vous commencez cette activité, vous avez <b class="code">0</b> pigeons nourris et <b class="code">1</b> pigeons que vous allez nourrir à la minute suivante.
+        </p>
+        <pre class="brush: python">
+fed = 0
+new = 1
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            D'accord, que faire ensuite?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Ce que vous allez faire ensuite, c'est répéter certaines opérations, jusqu'à ce que vous ayez suffisamment de <b class="code">food</b> pour le nombre actuel de pigeons près de vous <b class="code">fed</b> et le nombre suivant de pigeons à venir <b class="code">new</b>. Le site <a target="_blank" href="https://www.w3schools.com/python/python_while_loops.asp">while loop</a> permet de décrire au mieux ce type de situation.
+        </p>
+        <pre class="brush: python">
+fed = 0
+new = 1
+while food >= fed + new:
+    ...
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Je ne comprends pas comment opérer avec des variables à l'intérieur d'une boucle.
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Imaginons la situation. La première chose que vous faites est de nourrir les pigeons que vous avez déjà près de vous (les pigeons mangent et mangent chaque minute sans arrêt) et ceux qui sont arrivés cette minute. Ainsi, le nombre de pigeons <b class="code">fed</b> augmente de <b class="code">new</b> pigeons et ...
+        </p>
+        <pre class="brush: python">
+fed += new
+        </pre>
+        <p>
+            ... le <b class="code">food</b> que vous avez diminue du nombre de tous les pigeons de votre <b class="code">fed</b> à cette minute.
+        </p>
+        <pre class="brush: python">
+food -= fed
+        </pre>
+        <p>
+            Comme vous savez que la minute suivante, il y aura encore plus de pigeons, vous devriez également augmenter le nombre de pigeons <b class="code">new</b> à l'intérieur de la boucle.
+        </p>
+        <pre class="brush: python">
+new += 1
+        </pre>
+        <p>
+            Comme je l'ai dit précédemment, vous effectuez ces opérations encore et encore (en boucle) jusqu'à ce que vous ayez suffisamment de nourriture pour le nombre actuel et le nombre suivant de pigeons.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            À quoi devrait ressembler ma solution jusqu'à présent?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Il suffit de réunir tous les indices précédents.
+        </p>
+        <pre class="brush: python">
+fed = 0
+new = 1
+while food >= fed + new:
+    fed += new
+    food -= fed
+    new += 1
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Aidez-moi à terminer la logique. Que faire lorsqu'il n'y a pas assez de nourriture pour nourrir tous les pigeons dans la minute qui suit?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Les restes de <b class="code">food</b> peuvent ne pas être suffisants pour nourrir <b class="code">fed + new</b>, mais il y a deux cas possibles ici. Les restes de <b class="code">food</b> peuvent être plus importants que les pigeons présentés et suffisants pour nourrir une partie des pigeons de <b class="code">new</b> pour la première fois, de sorte que le nombre total de pigeons nourris augmentera et le nombre général de pigeons que vous <b class="code">fed</b> cette minute (et le résultat de la fonction) sera égal à <b class="code">food</b>. 
+        </p>
+        <p>
+            La deuxième variante possible est lorsque <b class="code">food</b> reste plus petit que <b class="code">fed</b> - même pas assez pour nourrir les pigeons déjà présentés, mais le nombre total de pigeons <b class="code">fed</b> est déjà nourri au moins une fois, donc le résultat de la fonction dans ce cas est <b class="code">fed</b>.
+        </p>
+        <p>
+            En bref, vous recherchez le maximum entre deux valeurs - les pigeons que vous pouvez nourrir cette minute (il reste<b class="code">food</b> ) et qui sont déjà <b class="code">fed</b>. 
+        </p>
+        <pre class="brush: python">
+result = max(food, fed)
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>Alors, à quoi devrait ressembler ma solution finale?</p>
+    </div>
+    <div class="answer">
+        <p>
+            Il vous suffit d'envelopper votre code dans une expression de fonction et de renvoyer l'expression <b class="code">result</b>.
+        </p>
+        <p>Voici la solution complète:</p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def checkio(food: int) -> int:
+
+    fed = 0
+    new = 1
+    while food >= fed + new:
+        fed += new
+        food -= fed
+        new += 1
+    
+    return max(food, fed)
+        </pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>Montrez-moi d'autres solutions!<br />
+        parce que je veux être une vraie 🥇 Python Ninnjaa!</p>
+    </div>
+    <div class="answer">
+        <p>Bien sûr, prenez-le!</p>
+        <p>
+            Dans cette solution, la récursion est utilisée. S'il n'y a pas assez de nourriture, vous retournez les valeurs dans les mêmes cas que dans la solution des indices. S'il y a assez de nourriture, vous appelez la fonction à nouveau avec des valeurs mises à jour. 
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def checkio(food: int, all_pig: int = 1, fed: int = 0) -> int:
+
+    if food <= fed:
+        return fed
+    if food <= all_pig:
+        return food
+        
+    return checkio(food - all_pig, 2 * all_pig - fed + 1, all_pig)
+        </pre>
+        </div>
+        <p>
+            La séquence des pigeons présentés à chaque minute est 1, 3, 6, 10, 15 ... Séquence des pigeons nourris toutes les minutes: 1, 4, 10, 20, 35 ... C'est la séquence a(i) = i*(i+1)*(i+2)/6. Mettez a(i) = nourriture et obtenez l'équation cubique: i*(i+1)*(i+2) - 6*n = 0 qu'il est possible de résoudre avec la méthode de Cardano.
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+from math import sqrt
+
+
+def checkio(food: int) -> int:
+
+    alpha = (3*food - sqrt(9*(food**2)-1/27)) ** (1/3)
+    beta = (3*food + sqrt(9*(food**2)-1/27)) ** (1/3)
+    minute = (alpha + beta - 1) // 1 + 1
+    
+    fed = (minute-1)*minute/2
+    last_feed = (minute**2 - 1)*minute / 6
+        
+    return max(food - last_feed, fed)
+        </pre>
+        </div>
+        <p><b>Click "Best solutions" at mission menu and see a lot of other interesting solutions!</b></p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>Merci beaucoup! Je comprends mieux maintenant! Tout fonctionne bien!</p>
+    </div>
+    <div class="answer">
+        👍 Heureux de l'apprendre!
+    </div>
+</div>
+</body>
