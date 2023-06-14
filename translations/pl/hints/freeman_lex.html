@@ -1,0 +1,196 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        <p>Nie mam pojęcia, jak zacząć rozwiązywać tę misję.</p>
+    </div>
+    <div class="answer">
+        <p>
+            ogólny pomysł jest następujący. Dopóki nie mają Państwo wystarczającej ilości jedzenia, aby nakarmić następną liczbę gołębi, proszę je karmić, zwiększać liczbę gołębi i zmniejszać ilość jedzenia. Jeśli nie, proszę zwrócić liczbę gołębi, które już zostały nakarmione lub mogą zostać nakarmione.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>Ok, od czego powinienem zacząć?</p>
+    </div>
+    <div class="answer">
+        <p>
+            Ta misja rozwiąże się łatwiej, jeśli wyobrażą sobie Państwo opisaną sytuację i każdy krok. Potrzebne są dwie zmienne: <b class="code">fed</b> - dla liczby gołębi, które zostały już nakarmione co najmniej raz i będą karmione co minutę, jeśli wystarczy jedzenia, <b class="code">new</b> - dla liczby gołębi, które przyjdą do Państwa w następnej minucie.
+        </p>
+        <p>
+            Jakie powinny być wartości początkowe tych zmiennych? W momencie rozpoczęcia tego działania ma Pan(i) <b class="code">0</b> nakarmionych gołębi i <b class="code">1</b> gołębi, które zamierza Pan(i) nakarmić w następnej minucie.
+        </p>
+        <pre class="brush: python">
+fed = 0
+new = 1
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Proszę powiedzieć, co robić dalej?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Następnie należy powtarzać pewne operacje, aż do uzyskania wystarczającej liczby <b class="code">food</b> gołębi w pobliżu <b class="code">fed</b> i następnej liczby gołębi, które nadejdą <b class="code">new</b>. Strona <a target="_blank" href="https://www.w3schools.com/python/python_while_loops.asp">while loop</a> pozwala najlepiej opisać takie sytuacje.
+        </p>
+        <pre class="brush: python">
+fed = 0
+new = 1
+while food>= fed + new:
+    ...
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Nie rozumiem, jak dokładnie operować zmiennymi wewnątrz pętli.
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Proszę sobie wyobrazić sytuację. Pierwsze co Pan robi - karmi Pan gołębie, które już ma Pan w pobliżu (gołębie jedzą i jedzą co minutę bez przerwy) oraz te, które przyleciały w tej minucie. Tak więc liczba gołębi <b class="code">fed</b> wzrasta o <b class="code">new</b> gołębi i ...
+        </p>
+        <pre class="brush: python">
+fed += new
+        </pre>
+        <p>
+            ... liczba posiadanych <b class="code">food</b> gołębi zmniejsza się o liczbę wszystkich gołębi <b class="code">fed</b> w tej minucie.
+        </p>
+        <pre class="brush: python">
+food -= fed
+        </pre>
+        <p>
+            Ponieważ wie Pan, że w następnej minucie przyleci jeszcze więcej gołębi, powinien Pan również zwiększyć tę liczbę <b class="code">new</b> gołębi wewnątrz pętli.
+        </p>
+        <pre class="brush: python">
+new += 1
+        </pre>
+        <p>
+            Jak już wcześniej wspomniałem, wykonuje Pan te operacje raz za razem (w pętli), aż będzie Pan miał wystarczającą ilość pożywienia dla obecnej i następnej liczby gołębi.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Jak więc powinno wyglądać moje rozwiązanie?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Proszę połączyć wszystkie poprzednie wskazówki.
+        </p>
+        <pre class="brush: python">
+fed = 0
+new = 1
+while food>= fed + new:
+    fed += new
+    food -= fed
+    new += 1
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Proszę mi pomóc dokończyć układ logiczny. Co zrobić, gdy nie ma wystarczającej ilości jedzenia, aby nakarmić wszystkie gołębie w następnej minucie?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Resztki <b class="code">food</b> mogą nie wystarczyć do nakarmienia <b class="code">fed + new</b>, ale możliwe są dwa przypadki. Resztki <b class="code">food</b> mogą być większe niż prezentowane gołębie i wystarczyć do nakarmienia części gołębi <b class="code">new</b> po raz pierwszy, więc całkowita liczba nakarmionych gołębi wzrośnie, a ogólna liczba gołębi, które Pan <b class="code">fed</b> w tej minucie (i wynik funkcji) będzie równa <b class="code">food</b>. 
+        </p>
+        <p>
+            Drugim możliwym wariantem jest sytuacja, w której resztki <b class="code">food</b> są mniejsze niż <b class="code">fed</b> - nie wystarczą nawet do nakarmienia już zaprezentowanych gołębi, ale cała liczba gołębi <b class="code">fed</b> jest już nakarmiona co najmniej raz, więc wynik funkcji w tym przypadku wynosi <b class="code">fed</b>.
+        </p>
+        <p>
+            Krótko mówiąc, szuka Pan maksimum między dwiema wartościami - gołębiami, które może Pan nakarmić w tej minucie (resztki<b class="code">food</b> ) i które już są <b class="code">fed</b>. 
+        </p>
+        <pre class="brush: python">
+result = max(food, fed)
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>Jak więc powinno wyglądać moje ostateczne rozwiązanie?</p>
+    </div>
+    <div class="answer">
+        <p>
+            Wystarczy zawinąć swój kod w wyrażenie funkcji i zwrócić wyrażenie <b class="code">result</b>.
+        </p>
+        <p>Oto całe rozwiązanie:</p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def checkio(food: int) -> int:
+
+    fed = 0
+    new = 1
+    while food>= fed + new:
+        fed += new
+        food -= fed
+        new += 1
+    
+    return max(food, fed)
+        </pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>Proszę pokazać mi więcej rozwiązań!<br />
+        bo chcę być prawdziwym 🥇 Python Ninnjaa!</p>
+    </div>
+    <div class="answer">
+        <p>Jasne, proszę pobrać!</p>
+        <p>
+            W tym rozwiązaniu używana jest rekurencja. Jeśli nie ma wystarczającej ilości jedzenia, zwracane są wartości w tych samych przypadkach, co w rozwiązaniu z podpowiedzi. Jeśli jest wystarczająco dużo jedzenia, proszę wywołać funkcję ponownie ze zaktualizowanymi wartościami. 
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def checkio(food: int, all_pig: int = 1, fed: int = 0) -> int:
+
+    if food <= fed:
+        return fed
+    if food <= all_pig:
+        return food
+        
+    return checkio(food - all_pig, 2 * all_pig - fed + 1, all_pig)
+        </pre>
+        </div>
+        <p>
+            Kolejność gołębi prezentowanych co minutę to 1, 3, 6, 10, 15 .... Kolejność gołębi karmionych co minutę wynosi 1, 4, 10, 20, 35 .... Jest to sekwencja a(i) = i*(i+1)*(i+2)/6. Proszę podstawić a(i) = jedzenie i otrzymamy równanie sześcienne: i*(i+1)*(i+2) - 6*n = 0, które można rozwiązać metodą Cardano.
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+from math import sqrt
+
+
+def checkio(food: int) -> int:
+
+    alpha = (3*food - sqrt(9*(food**2)-1/27)) ** (1/3)
+    beta = (3*food + sqrt(9*(food**2)-1/27)) ** (1/3)
+    minute = (alpha + beta - 1) // 1 + 1
+    
+    fed = (minute-1)*minute/2
+    last_feed = (minute**2 - 1)*minute / 6
+        
+    return max(food - last_feed, fed)
+        </pre>
+        </div>
+        <p>Proszę kliknąć <b>Best Solutions</b> w menu misji i zobaczyć wiele innych ciekawych rozwiązań!</p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>Dzięki! Teraz wiem i rozumiem więcej! Wszystko działa jak należy!</p>
+    </div>
+    <div class="answer">
+        miło mi to słyszeć!
+    </div>
+</div>
+</body>

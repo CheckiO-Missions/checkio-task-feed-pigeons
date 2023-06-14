@@ -1,0 +1,43 @@
+<p>
+    Zaczynam karmić jednego z gołębi.
+    Minutę później przelatują dwa kolejne, a minutę później kolejne 3.
+    Następnie 4 i tak dalej (np. 1+2+3+4+...). Jedna porcja jedzenia wystarcza gołębiowi na minutę,
+    ale w przypadku, gdy nie ma wystarczającej ilości jedzenia dla wszystkich ptaków, gołębie, które przybyły pierwsze, jedzą pierwsze.
+    Gołębie są głodnymi zwierzętami i jedzą nie wiedząc, kiedy przestać.
+    Jeśli mam <b class="code">N</b> porcji karmy dla ptaków, ile gołębi zostanie nakarmionych przynajmniej jedną porcją pszenicy?
+</p>
+
+<p style="text-align: center;">
+    <img class="for_info_only" title="pigeons" src="{{MEDIA}}pigeons.png" alt="pigeons" width="600px"/>
+    <img class="for_editor_only" title="pigeons" src="{{MEDIA}}pigeons.png" alt="pigeons" width="380px"/>
+</p>
+
+
+
+
+<p>
+   <strong>Proszę wprowadzić:</strong> Ilość porcji pszenicy jako dodatnia liczba całkowita <span>{% if is_js %}(number){% else %}(int){% endif %}</span>.
+</p>
+
+<p>
+   <strong>Wyjście:</strong> Liczba nakarmionych gołębi jako liczba całkowita <span>{% if is_js %}(number){% else %}(int){% endif %}</span>.
+</p>
+
+
+<div class="for_info_only">
+    <p>
+        <strong>Przykłady:</strong>
+    </p>
+    <pre class="brush: {% if is_js %}javascript{% else %}python{% endif %}">{{init_code_tmpl}}</pre>
+</div>
+
+<p class="for_info_only">
+    <strong>Sposób użycia:</strong>
+    <i>to zadanie ilustruje, w jaki sposób możemy modelować różne sytuacje.
+    Oczywiście model ma ograniczone przybliżenie, ale często nie potrzebujemy idealnego modelu.</i>
+
+</p>
+<p>
+    <strong>Warunek wstępny:</strong>
+    <i>0 &lt; N &lt;<sup>105</sup>.</i>
+</p>
