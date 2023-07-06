@@ -1,7 +1,10 @@
-﻿<p>
-    我开始喂鸽子群之中的一只。一分钟后又飞来了两只鸽子，再过一分钟又飞来了三只，以此类推（例如：1+2+3 +4+......）。食品的一份可以让鸽子吃一分钟，但如果没有足够的食物，让那些先到的鸟先吃。
-    鸽子是非常饥饿的动物，他们不会停止进食。如果我有
-    <strong>N</strong>份的鸟饲料，有多少鸽子至少吃到一份小麦?
+<p>
+    我开始喂其中一只鸽子。
+    一分钟后，又有两只飞过，一分钟后，又有三只。
+    然后是4只，以此类推（例：1+2+3+4+...）。一份食物可以让一只鸽子维持一分钟的时间、
+    但为了防止食物不够所有的鸽子吃，先到的鸽子就先吃了。
+    鸽子是饥饿的动物，吃东西不知道什么时候停止。
+    如果我有<b class="code">N</b> 份鸟食，有多少只鸽子会被喂到至少一份小麦？
 </p>
 
 <p style="text-align: center;">
@@ -13,26 +16,28 @@
 
 
 <p>
-    <strong>输入: </strong> 小麦的份数 (int)。
+   <strong>输入：</strong>一个正整数的小麦份量 <span>{% if is_js %}(number){% else %}(int){% endif %}</span>.
 </p>
 
 <p>
-    <strong>输出: </strong> 已经喂食过的鸽子的数目 (int)。
+   <strong>输出：</strong>饲喂鸽子的数量为整数。 <span>{% if is_js %}(number){% else %}(int){% endif %}</span>.
 </p>
 
 
 <div class="for_info_only">
     <p>
-        <strong>范例:</strong>
+        <strong>举例说明：</strong>
     </p>
     <pre class="brush: {% if is_js %}javascript{% else %}python{% endif %}">{{init_code_tmpl}}</pre>
 </div>
 
 <p class="for_info_only">
-    <strong>如何使用：</strong>
-    此任务说明了我们可以怎样去模拟不同的情况。当然，该模型具有有限近似的性质，但通常我们并不需要一个完美的模型。
+    <strong>它是如何被使用的：</strong>
+    <i>这个任务说明了我们如何对各种情况进行建模。
+    当然，这个模型有一个有限的近似值，但很多时候我们不需要一个完美的模型。</i>
 
 </p>
 <p>
-    <strong>前提: </strong> 0 &lt; N &lt; 10<sup>5</sup>.
+    <strong>前提条件：</strong>
+    <i>0 &lt; N &lt;<sup>105</sup>.</i>
 </p>
