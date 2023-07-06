@@ -1,0 +1,196 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        <p>我不知道如何开始解决这个任务。</p>
+    </div>
+    <div class="answer">
+        <p>
+            一般的想法是这样的。直到你有足够的食物来喂养下一批鸽子，你就喂它们，增加来的鸽子数量，减少食物。如果没有，就返回已经喂过的鸽子数量，或者可能喂过的鸽子。
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>好的，我应该从什么开始？</p>
+    </div>
+    <div class="answer">
+        <p>
+            如果你想象一下所描述的情况和每个步骤，这个任务的解决就更容易了。你首先需要的是两个变量：<b class="code">fed</b> - 代表你已经喂过至少一次的鸽子数量，如果食物足够的话，每分钟都要喂一次；<b class="code">new</b> - 代表下一分钟来找你的鸽子数量。
+        </p>
+        <p>
+            这些变量的初始值应该是什么？当你开始这个活动时，你有<b class="code">0</b> 鸽子被喂养，<b class="code">1</b> 鸽子你将在下一分钟被喂养。
+        </p>
+        <pre class="brush: python">
+fed = 0
+new = 1
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            好的，接下来该怎么做？
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            你接下来要做的是重复一些操作，直到你有足够的<b class="code">food</b> ，以满足当前你附近的鸽子数量<b class="code">fed</b> ，以及接下来的鸽子数量<b class="code">new</b> 。<a target="_blank" href="https://www.w3schools.com/python/python_while_loops.asp">while loop</a> 可以最好地描述这种情况。
+        </p>
+        <pre class="brush: python">
+fed = 0
+new = 1
+while food>= fed + new:
+    ...
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            我不明白，究竟如何在循环中对变量进行操作。
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            让我们继续想象这种情况。首先你要做的是--喂养你身边已经有的鸽子（鸽子每分钟都在不停地吃东西）和这一分钟来的鸽子。因此，<b class="code">fed</b> 鸽子的数量增加了<b class="code">new</b> 鸽子和...
+        </p>
+        <pre class="brush: python">
+fed += new
+        </pre>
+        <p>
+            ...你拥有的<b class="code">food</b> ，减少了你这一分钟的所有鸽子的数量<b class="code">fed</b> 。
+        </p>
+        <pre class="brush: python">
+food -= fed
+        </pre>
+        <p>
+            因为你知道，下一分钟会有更多的鸽子来，你也应该增加循环内的<b class="code">new</b> 鸽子数量。
+        </p>
+        <pre class="brush: python">
+new += 1
+        </pre>
+        <p>
+            正如我之前所说的，你一次又一次地进行这些操作（内循环），直到你有足够的食物来满足现在和下一次的鸽子数量。
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            那么到目前为止，我的解决方案应该是怎样的呢？
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            只要把之前的所有提示连在一起。
+        </p>
+        <pre class="brush: python">
+fed = 0
+new = 1
+while food>= fed + new:
+    fed += new
+    food -= fed
+    new += 1
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            帮助我完成这个逻辑。如果下一分钟没有足够的食物来喂养所有的鸽子，该怎么办？
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            <b class="code">food</b> 可能不足以喂养<b class="code">fed + new</b> ，但这里有两种可能的情况。<b class="code">food</b> 剩余的食物可能会比呈现的鸽子多，足以首次喂养部分<b class="code">new</b> 鸽子，所以被喂养的鸽子总数会增加，而你这一分钟<b class="code">fed</b> 的一般鸽子数量（以及函数的结果）将等于<b class="code">food</b> 。 
+        </p>
+        <p>
+            第二种可能的情况是，当<b class="code">food</b> 的剩余量小于<b class="code">fed</b> - 甚至不足以喂养已经呈现的鸽子，但整个<b class="code">fed</b> 的鸽子数量至少已经被喂养过一次，所以这种情况下的函数结果是<b class="code">fed</b> 。
+        </p>
+        <p>
+            简而言之，你是在寻求两个数值之间的最大值--你这一分钟可以喂养的鸽子(<b class="code">food</b> remains)和已经<b class="code">fed</b> 。 
+        </p>
+        <pre class="brush: python">
+result = max(food, fed)
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>那么，我的最终解决方案应该是什么样子的呢？</p>
+    </div>
+    <div class="answer">
+        <p>
+            你只需要将你的代码包装成一个函数表达式并返回<b class="code">result</b> 。
+        </p>
+        <p>下面是整个解决方案：</p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def checkio(food: int) -> int:
+
+    fed = 0
+    new = 1
+    while food>= fed + new:
+        fed += new
+        food -= fed
+        new += 1
+    
+    return max(food, fed)
+        </pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>告诉我更多的解决方案!<br />
+        因为我想成为一个真正的🥇 Python Ninnjaa!</p>
+    </div>
+    <div class="answer">
+        <p>当然，抓住它!</p>
+        <p>
+            在这个解决方案中，使用了递归法。如果没有足够的食物，你就在与提示中的解决方案相同的情况下返回数值。如果有足够的食物，你就用更新的值再次调用该函数。 
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def checkio(food: int, all_pig: int = 1, fed: int = 0) -> int:
+
+    if food <= fed:
+        return fed
+    if food <= all_pig:
+        return food
+        
+    return checkio(food - all_pig, 2 * all_pig - fed + 1, all_pig)
+        </pre>
+        </div>
+        <p>
+            每分钟出现的鸽子的顺序是1，3，6，10，15......。每分钟被喂养的鸽子的序列是1, 4, 10, 20, 35 ...这就是a(i)=i*(i+1)*(i+2)/6的序列。把a(i)=食物，得到立方体方程：i*(i+1)*(i+2)-6*n=0，可以用卡达诺方法解决。
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+from math import sqrt
+
+
+def checkio(food: int) -> int:
+
+    alpha = (3*food - sqrt(9*(food**2)-1/27)) ** (1/3)
+    beta = (3*food + sqrt(9*(food**2)-1/27)) ** (1/3)
+    minute = (alpha + beta - 1) // 1 + 1
+    
+    fed = (minute-1)*minute/2
+    last_feed = (minute**2 - 1)*minute / 6
+        
+    return max(food - last_feed, fed)
+        </pre>
+        </div>
+        <p>点击任务菜单上的<b>Best Solutions</b> ，可以看到很多其他有趣的解决方案!</p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>谢谢!我现在知道并理解了更多!一切都很好!</p>
+    </div>
+    <div class="answer">
+        👍很高兴听到这个消息!
+    </div>
+</div>
+</body>
